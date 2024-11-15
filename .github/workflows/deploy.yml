@@ -21,7 +21,7 @@ jobs:
 
       - name: Add DigitalOcean to Known Hosts
         run: |
-          ssh-keyscan -H <YOUR_DIGITALOCEAN_SERVER_IP> >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.DIGITALOCEAN_SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: Test SSH Connection
-        run: ssh root@<YOUR_DIGITALOCEAN_SERVER_IP> "echo Connected to DigitalOcean"
+        run: ssh root@${{ secrets.DIGITALOCEAN_SERVER_IP }} "echo Connected to DigitalOcean"
