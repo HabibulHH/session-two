@@ -25,4 +25,4 @@ jobs:
       - name: Test SSH Connection and Pull Latest Code
         run: |
           ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITALOCEAN_HOST }} "echo Connected to DigitalOcean"
-          ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITALOCEAN_HOST }} "cd session-two && git pull"
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITALOCEAN_HOST }} "cd session-two && git pull && pm2 restart server.js"
