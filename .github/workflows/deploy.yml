@@ -22,5 +22,7 @@ jobs:
       - name: Add Server to Known Hosts
         run: ssh-keyscan -H ${{ secrets.DIGITALOCEAN_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Test SSH Connection
-        run: ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITALOCEAN_HOST }} "echo Connected to DigitalOcean"
+      - name: Test SSH Connection and Pull Latest Code
+        run: |
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITALOCEAN_HOST }} "echo Connected to DigitalOcean"
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITALOCEAN_HOST }} "cd session-two && git pull"
