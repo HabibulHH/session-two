@@ -1,0 +1,19 @@
+name: Echo Message on Push to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  echo-message:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository (optional for this case)
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Echo the message
+      - name: Echo Push Event
+        run: echo "A push has happened on the main branch!"
