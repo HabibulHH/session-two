@@ -1,4 +1,4 @@
-name: Echo Message on Push to Main
+name: Access DigitalOcean Server
 
 on:
   push:
@@ -6,14 +6,21 @@ on:
       - main
 
 jobs:
-  echo-message:
+  access-digitalocean:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository (optional for this case)
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Echo the message
-      - name: Echo Push Event
-        run: echo "A push has happened on the main branch!"
+      - name: Add SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DIGITALOCEAN_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Add DigitalOcean to Known Hosts
+        run: ssh-keyscan -H <YOUR_DIGITALOCEAN_SERVER_IP> >> ~/.ssh/known_hosts
+
+      - name: Test SSH Connection
+        run: ssh root@<YOUR_DIGITALOCEAN_SERVER_IP> "echo Connected to DigitalOcean"
