@@ -20,7 +20,8 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
       - name: Add DigitalOcean to Known Hosts
-        run: ssh-keyscan -H <YOUR_DIGITALOCEAN_SERVER_IP> >> ~/.ssh/known_hosts
+        run: |
+          ssh-keyscan -H <YOUR_DIGITALOCEAN_SERVER_IP> >> ~/.ssh/known_hosts
 
       - name: Test SSH Connection
         run: ssh root@<YOUR_DIGITALOCEAN_SERVER_IP> "echo Connected to DigitalOcean"
